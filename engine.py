@@ -16,6 +16,8 @@ _COMMON_OPTS = {
     'nocheckcertificate': True,
     'source_address': '0.0.0.0',
     'simulate': True,
+    'format': 'all',
+    'js_runtimes': {'node': {}},
 }
 
 import urllib.request
@@ -63,7 +65,7 @@ def _get_youtube_args() -> dict:
 # ──────────────────────────────────────────────
 def _extract_formats(info: dict) -> list[dict]:
     formats_dict: dict[str, dict] = {}
-    for f in info.get('formats', []):
+    for f in info.get('formats') or []:
         vcodec    = f.get('vcodec', '')
         ext       = f.get('ext', '')
         height    = f.get('height')
@@ -95,7 +97,7 @@ def _extract_formats(info: dict) -> list[dict]:
 
 def _get_best_video_with_audio(info: dict) -> str:
     best_video = None
-    for f in info.get('formats', []):
+    for f in info.get('formats') or []:
         vcodec = f.get('vcodec', 'none')
         acodec = f.get('acodec', 'none')
         url = f.get('url') or f.get('manifest_url')
@@ -106,7 +108,7 @@ def _get_best_video_with_audio(info: dict) -> str:
 
 def _get_best_audio(info: dict) -> str:
     best_audio = None
-    for f in info.get('formats', []):
+    for f in info.get('formats') or []:
         vcodec = f.get('vcodec', 'none')
         acodec = f.get('acodec', 'none')
         url = f.get('url') or f.get('manifest_url')
