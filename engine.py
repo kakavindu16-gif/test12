@@ -26,7 +26,7 @@ import json
 # ──────────────────────────────────────────────
 def _get_youtube_args() -> dict:
     yt_args = {
-        'player_client': ['tv', 'web'],
+        'player_client': ['web'],
     }
     
     # 1. Try to fetch from Remote PO Token Server (if configured)
