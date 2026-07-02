@@ -118,15 +118,17 @@ async def get_info(body: InfoRequest, request: Request):
     base = str(request.base_url)  # e.g. https://xxx.onrender.com/
 
     # Wrap best_video URL
-    if "best_video" in result:
+    best_video = result.pop("best_video", "")
+    if best_video:
         result["best_video_download_url"] = _make_stream_url(
-            result.pop("best_video"), base, ext="mp4"
+            best_video, base, ext="mp4"
         )
 
     # Wrap best_audio URL
-    if "best_audio" in result:
+    best_audio = result.pop("best_audio", "")
+    if best_audio:
         result["audio_download_url"] = _make_stream_url(
-            result.pop("best_audio"), base, ext="m4a"
+            best_audio, base, ext="m4a"
         )
 
     # Wrap per-format URLs — never expose raw YT URL
