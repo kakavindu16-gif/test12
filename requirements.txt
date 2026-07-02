@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+yt-dlp @ git+https://github.com/yt-dlp/yt-dlp.git
+pydantic
+python-jose[cryptography]
+httpx
+cachetools
